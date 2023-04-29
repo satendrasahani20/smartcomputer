@@ -14,26 +14,13 @@ import Quardinator from '@/common/components/admin/Quardinator';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdminQuardinator, getAdminQuardinator } from '@/service/action/admin';
 import CenterLists from './center-lists';
+import { customStyles } from '@/common/style/commonModalStyle';
 const index = () => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false)
   const { quardinates } = useSelector((state) => state?.adminReducer)
   const dispatch = useDispatch();
-  const customStyles = {
-
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.7)'
-    },
-    content: {
-      top: '30%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      marginTop: "100px"
-    }
-  }
+ 
 
   const [quardinateObj, setQuardinateObj] = useState([]);
   const [centreDetail, setCentreDetail] = useState({
@@ -86,7 +73,7 @@ const index = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-sm-12'>
-            <Button variant={"contained"} onClick={() => addQuardinator()}>Add Quardinator</Button>
+            <Button variant={"contained"} sx={{left: "-14px", top: "-10px"}} onClick={() => addQuardinator()}>Add Quardinator</Button>
           </div>
         </div>
       </div>

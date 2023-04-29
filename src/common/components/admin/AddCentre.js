@@ -7,10 +7,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImageAction } from '@/service/action/common';
-const AddCentre = ({ centreObj, setCentreObj }) => {
+const AddCentre = ({ centreObj, setCentreObj,setConfirmPassword,confirmPassword }) => {
     const { centreOuterImage, centreInnerImage } = useSelector((state) => state.commonReducer)
     const dispatch = useDispatch()
-    const [image, setImage] = useState("");
+  
     const handleChange = (e) => {
         setCentreObj({
             ...centreObj, [e.target.name]: e.target.value
@@ -201,6 +201,27 @@ const AddCentre = ({ centreObj, setCentreObj }) => {
                     name="email"
                     sx={{ zIndex: 0, width: "100%", marginTop: 2 }}
                     onChange={handleChange}
+
+                />
+            </div>
+            <div className='col-sm-6'>
+                <TextField
+                    size="small"
+                    value={centreObj?.password}
+                    label="Password"
+                    name="password"
+                    sx={{ zIndex: 0, width: "100%", marginTop: 2 }}
+                    onChange={handleChange}
+
+                />
+            </div>
+            <div className='col-sm-6'>
+                <TextField
+                    size="small"
+                    value={confirmPassword}
+                    label="Confirm Password"
+                    sx={{ zIndex: 0, width: "100%", marginTop: 2 }}
+                    onChange={(e)=>setConfirmPassword(e.target.value)}
 
                 />
             </div>

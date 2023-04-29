@@ -17,6 +17,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Question from '@/common/components/admin/Question';
 import QuestionField from '@/common/components/admin/QuestionField';
 import { useDispatch, useSelector } from 'react-redux';
+import { customStyles } from '@/common/style/commonModalStyle';
 
 const CourseDetails = () => {
     const router = useRouter()
@@ -60,20 +61,6 @@ const CourseDetails = () => {
     })
     const [isOpen, setIsOpen] = useState(false)
     const [options, setOptions] = useState([])
-    const customStyles = {
-        overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)'
-        },
-        content: {
-            top: '30%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            marginTop: "100px"
-        }
-    }
 
     const cancel = () => {
         setQuestionObj({})
