@@ -10,18 +10,56 @@ import { getSession } from 'next-auth/react';
 import { assessmentQuestion, students } from '@/common/constant/assessments';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
-
+import Modal from 'react-modal'
+import { customStyles } from '@/common/style/commonModalStyle';
+import { useState } from 'react';
+import StudentForm from '@/common/components/admin/StudentForm';
 
 const Student = () => {
-  const router =useRouter();
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
+  const [confirmPassword,setConfirmPassword]=useState("")
+
+  const [studentObj, setStudentObj] = useState({});
+  const handleChange = (e) => {
+
+  }
+
+  const addStudent = () => {
+    setIsOpen(true)
+  }
+
+  const closeStudentModal=()=>{
+    setIsOpen(false)
+  }
   return (
     <div class="show_data">
-      <div className='container'>
+      <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}
+        style={customStyles}
+      >
+        <div className='container'>
+          <StudentForm
+            handleChange={handleChange}
+            studentObj={studentObj}
+            setStudentObj={setStudentObj}
+            setConfirmPassword={setConfirmPassword}
+            confirmPassword={confirmPassword}
+          />
           <div className='row'>
-               <div className='col-sm-12'>
-                    <Button variant={"contained"} sx={{left: "-14px", top: "-10px"}}>Add Student</Button>
-               </div>
+            <div className='col-12 text-right'>
+              <Button variant={"contained"} style={{backgroundColor:"red"}} className='m-2' onClick={closeStudentModal}>Cancel</Button>
+              <Button variant={"contained"} className='m-2' onClick={addStudent}>Save</Button>
+            </div>
+
           </div>
+        </div>
+      </Modal>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-sm-12'>
+            <Button variant={"contained"} sx={{ left: "-14px", top: "-10px" }} onClick={addStudent}>Add Student</Button>
+          </div>
+        </div>
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -40,7 +78,7 @@ const Student = () => {
               students?.map((item, index) => (
                 <TableRow
                   key={index}
-                  onClick={()=>router?.push("/student/assesments/test")}
+                  onClick={() => router?.push("/student/assesments/test")}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">

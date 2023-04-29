@@ -287,7 +287,7 @@ const Quardinator = ({ cancel, editQuardinateObj }) => {
                         {/* <img src={quardinatorImage ? quardinatorImage : image ? URL?.createObjectURL(image) : ""} width="20%" /> */}
                     </div>
                     <div className='col-sm-12 text-center'>
-                        <Button variant='contained' className='mt-3'
+                        <Button variant='contained' className='mt-3' style={{backgroundColor:"red"}}
                             onClick={cancel}
                         >Cancel</Button>
 

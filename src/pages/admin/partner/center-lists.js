@@ -108,7 +108,7 @@ const CenterLists = ({ data ,closeCenter}) => {
           />
           <div className='row'>
             <div className='col-sm-12 text-right'>
-              <Button variant='contained' onClick={closeCentreModal} className='m-3'>Cancel</Button>
+              <Button variant='contained'style={{backgroundColor:"red"}} onClick={closeCentreModal} className='m-3'>Cancel</Button>
               <Button variant='contained' onClick={handleCentreSubmit}>{centreDetails?.edit ? "Update Centre" : "Add Centre"}</Button>
             </div>
           </div>
@@ -125,7 +125,7 @@ const CenterLists = ({ data ,closeCenter}) => {
 
           </div>
           <div className='col-2'>
-            <Button variant={"contained"} onClick={closeCenter} size='small'>Cancel</Button>
+            <Button variant={"contained"} style={{backgroundColor:"red"}} onClick={closeCenter} size='small'>Cancel</Button>
 
           </div>
         </div>
