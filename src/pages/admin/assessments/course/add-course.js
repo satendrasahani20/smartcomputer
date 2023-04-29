@@ -1,3 +1,4 @@
+import { customStyles } from '@/common/style/commonModalStyle';
 import { saveCourse, updateCourse } from '@/service/action/admin';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
@@ -18,20 +19,6 @@ const AddCourse = ({ isOpen, setIsOpen, isEdit, course ,onClose}) => {
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
-    }
-    const customStyles = {
-        overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)'
-        },
-        content: {
-            top: '30%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            marginTop: "100px"
-        }
     }
     const saveCourses = () => {
         if(isEdit){

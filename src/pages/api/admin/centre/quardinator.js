@@ -40,7 +40,7 @@ export default async function (req, res) {
         // }
 
     } catch (e) {
-        return res.status(401).json({ message: e.message })
+        return res.status(200).json({ message: e.message })
     }
 
 

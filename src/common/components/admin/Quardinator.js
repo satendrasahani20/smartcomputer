@@ -32,7 +32,10 @@ const Quardinator = ({ cancel, editQuardinateObj }) => {
         qualification: "",
         adhar: "",
         image: "",
+        password:"",
     })
+
+    const [confirmPassword,setConfirmPassword]=useState("")
 
     useEffect(() => {
         if (editQuardinateObj?._id) {
@@ -64,11 +67,22 @@ const Quardinator = ({ cancel, editQuardinateObj }) => {
     const handleSubmit = () => {
         if (quardinatorImage || image) {
             if (edit) {
+                if(confirmPassword){
+                    if(!quardinateObj?.password || quardinateObj?.password !=confirmPassword){
+                        toast.error("Password and confirm password not match!")
+                        return false;
+                    }
+                }
                 let id = quardinateObj?._id;
                 delete quardinateObj?._id;
                 dispatch(updateAdminQuardinator(id,quardinateObj,close))
             } else {
-                dispatch(saveQuardinator({ ...quardinateObj, image: quardinatorImage },close))
+                if(!quardinateObj?.password || quardinateObj?.password ==confirmPassword){
+                    dispatch(saveQuardinator({ ...quardinateObj, image: quardinatorImage },close))
+                }else{
+                    toast.error("Password and confirm password not match!")
+                }
+             
             }
 
         } else {
@@ -240,6 +254,28 @@ const Quardinator = ({ cancel, editQuardinateObj }) => {
                             name="adhar"
                             sx={{ zIndex: 0, width: "100%", marginTop: 2 }}
                             onChange={handleChange}
+                        />
+
+                    </div>
+                    <div className='col-sm-4'>
+                        <TextField
+                            size="small"
+                            value={quardinateObj?.password}
+                            label="Password"
+                            name="password"
+                            sx={{ zIndex: 0, width: "100%", marginTop: 2 }}
+                            onChange={handleChange}
+                        />
+
+                    </div>
+                    <div className='col-sm-4'>
+                        <TextField
+                            size="small"
+                            value={confirmPassword}
+                            label="Confirm Password"
+                            name="confirmPassword"
+                            sx={{ zIndex: 0, width: "100%", marginTop: 2 }}
+                            onChange={(e)=>setConfirmPassword(e.target.value)}
                         />
 
                     </div>

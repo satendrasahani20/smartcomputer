@@ -44,6 +44,10 @@ const quardinatorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     qualification: {
         type: String,
         required: true
@@ -60,6 +64,7 @@ const quardinatorSchema = new mongoose.Schema({
         {
             centreName: { type: String },
             ownerName: { type: String },
+            password: { type: String },
             fatherName: { type: String },
             gender: { type: String },
             qualification: { type: String },
@@ -71,9 +76,9 @@ const quardinatorSchema = new mongoose.Schema({
             mobileNo: { type: String },
             email: { type: String },
             centrePhoto: {
-                    inner: { type: String },
-                    outer: { type: String }
-                }
+                inner: { type: String },
+                outer: { type: String }
+            }
             ,
 
             teacher: [

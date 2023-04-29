@@ -13,6 +13,7 @@ import { Button } from '@mui/material';
 import AddCentre from '@/common/components/admin/AddCentre';
 import { useDispatch } from 'react-redux';
 import { saveAdminCentre, updateAdminCentre } from '@/service/action/admin';
+import { customStyles } from '@/common/style/commonModalStyle';
 const CenterLists = ({ data ,closeCenter}) => {
   const dispatch = useDispatch()
   const [centreDetails, setCentreDetail] = useState({
@@ -34,6 +35,7 @@ const CenterLists = ({ data ,closeCenter}) => {
     pincode: "",
     mobileNo: "",
     email: "",
+    password:"",
     centrePhoto: {
       inner: "",
       outer: ""
@@ -48,23 +50,9 @@ const CenterLists = ({ data ,closeCenter}) => {
     ]
 
   })
-  const customStyles = {
-
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.7)'
-    },
-    content: {
-      top: '30%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      marginTop: "100px"
-    }
-  }
-
+  const [confirmPassword,setConfirmPassword]=useState("");
   const addCentre = () => {
+    console.log("ceeee",centreObj)
     setCentreDetail({ 
       modal: true,
       edit: false,
@@ -115,6 +103,8 @@ const CenterLists = ({ data ,closeCenter}) => {
           <AddCentre
             setCentreObj={setCentreObj}
             centreObj={centreObj}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
           />
           <div className='row'>
             <div className='col-sm-12 text-right'>

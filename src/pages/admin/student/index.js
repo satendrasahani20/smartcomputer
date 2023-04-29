@@ -19,7 +19,7 @@ const Student = () => {
       <div className='container'>
           <div className='row'>
                <div className='col-sm-12'>
-                    <Button variant={"contained"}>Add Student</Button>
+                    <Button variant={"contained"} sx={{left: "-14px", top: "-10px"}}>Add Student</Button>
                </div>
           </div>
       </div>
