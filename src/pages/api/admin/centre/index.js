@@ -37,12 +37,13 @@ export default async function (req, res) {
                         item.email = req.body.email,
                         item.centrePhoto = req.body.centrePhoto,
                         item.teacher = req.body.teacher
+                        item.password = req.body.password
                 }
             })
             await data.save();
             result = data;
             if (!result) {
-                return res.status(401).json({ message: "Record Not Found" });
+                return res.status(200).json({ message: "Record Not Found" });
             }
         } else if (req.method == "DELETE") {
             result = await Quardinator.findOneAndUpdate({ "centre._id": req.query.id }, {
@@ -62,14 +63,14 @@ export default async function (req, res) {
         if (result) {
             return res.status(200).json({ status: 200, data: result, message: "Success" })
         } else {
-            return res.status(401).json({ message: "FAILED" })
+            return res.status(200).json({ message: "FAILED" })
         }
         // } else {
         //     return res.status(401).json({ message: "Unautherized" })
         // }
 
     } catch (e) {
-        return res.status(401).json({ message: e.message })
+        return res.status(200).json({ message: e.message })
     }
 
 

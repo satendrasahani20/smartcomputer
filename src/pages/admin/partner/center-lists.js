@@ -12,9 +12,9 @@ import Modal from 'react-modal'
 import { Button } from '@mui/material';
 import AddCentre from '@/common/components/admin/AddCentre';
 import { useDispatch } from 'react-redux';
-import { saveAdminCentre, updateAdminCentre } from '@/service/action/admin';
+import { deleteAdminCentre, saveAdminCentre, updateAdminCentre } from '@/service/action/admin';
 import { customStyles } from '@/common/style/commonModalStyle';
-const CenterLists = ({ data ,closeCenter}) => {
+const CenterLists = ({ data,closeCenter}) => {
   const dispatch = useDispatch()
   const [centreDetails, setCentreDetail] = useState({
     modal: false,
@@ -22,6 +22,11 @@ const CenterLists = ({ data ,closeCenter}) => {
     data: [],
     id: ""
   })
+  const [centreList,setCentreLists]=useState([])
+
+  useEffect(()=>{
+   setCentreLists(data?.data)
+  },[data])
   const [centreObj, setCentreObj] = useState({
     centreName: "",
     ownerName: "",
@@ -83,17 +88,15 @@ const CenterLists = ({ data ,closeCenter}) => {
 
   const handleCentreSubmit = () => {
     if (centreDetails?.edit) {
-      dispatch(updateAdminCentre(centreObj, closeCentreModal))
-    } else {
-
+      dispatch(updateAdminCentre(centreObj,closeCentreModal,setCentreLists))
+    } else {   
+      dispatch(saveAdminCentre(centreObj,data?.quardinationId,closeCentreModal,setCentreLists))
     }
-
-    console.log("I am called", centreObj)
   }
 
-  useEffect(()=>{
-   console.log("centreDetails",centreDetails)
-  },[centreDetails])
+  const handleCentreDelete=(item)=>{
+    dispatch(deleteAdminCentre(item?._id,centreList,setCentreLists))
+  }
   return (
     <>
       <Modal isOpen={centreDetails?.modal} onRequestClose={() => closeCentreModal}
@@ -145,7 +148,7 @@ const CenterLists = ({ data ,closeCenter}) => {
           </TableHead>
           <TableBody>
             {
-              data?.data?.map((item, index) => (
+              centreList?.map((item, index) => (
                 <TableRow
                   key={index}
                   // onClick={() => editCentre(item?.centre)}
@@ -160,7 +163,7 @@ const CenterLists = ({ data ,closeCenter}) => {
                   <TableCell align="right">{item?.address}</TableCell>
                   <TableCell align="right" sx={{ cursor: "pointer" }}>
                     <span className='text-primary' onClick={(e) => { e.stopPropagation(); editCentre(item) }} >Edit</span>
-                    <span className='text-danger' onClick={(e) => { e.stopPropagation(); deleteQuardinate(item?._id) }} > Delete</span>
+                    <span className='text-danger' onClick={(e) => { e.stopPropagation(); handleCentreDelete(item)}} > Delete</span>
                   </TableCell>
                 </TableRow>
               ))

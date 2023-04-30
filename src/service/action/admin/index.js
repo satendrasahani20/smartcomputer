@@ -79,20 +79,24 @@ export const deleteAdminQuardinator = (id) => ({
   id,
 })
 
-export const saveAdminCentre = (data,id,cancel) => ({
+export const saveAdminCentre = (data,id,cancel,setObj) => ({
   type: types.SAVE_ADMIN_CENTRE,
   data,
   cancel,
-  id
+  id,
+  setObj
 })
-export const deleteAdminCentre = (id) => ({
+export const deleteAdminCentre = (id,obj,setObj) => ({
   type: types.DELETE_ADMIN_CENTRE,
-  id
+  id,
+  obj,
+  setObj
 })
 
-export const updateAdminCentre = (data,cancel) => ({
+export const updateAdminCentre = (data,cancel,setObj) => ({
   type: types.UPDATE_ADMIN_CENTRE,
   data,
   cancel,
+  setObj,
 })
 
