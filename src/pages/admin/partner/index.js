@@ -28,12 +28,14 @@ const index = () => {
     edit: false,
     data: [],
     name:"",
+    quardinationId:"",
   })
-  const openCentre = (data,name) => {
+  const openCentre = (data,name,quardinationId) => {
     setCentreDetail({
       modal: true,
       data,
-      name
+      name,
+      quardinationId,
     })
   }
   const closeCentre = () => {
@@ -94,7 +96,7 @@ const index = () => {
               quardinates?.map((item, index) => (
                 <TableRow
                   key={index}
-                  onClick={() => openCentre(item?.centre,item?.name)}
+                  onClick={() => openCentre(item?.centre,item?.name,item?._id)}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">

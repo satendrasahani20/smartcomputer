@@ -372,24 +372,21 @@ export function* deleteAdminQuardinatorSaga({ id }) {
   }
 }
 
-export function* updateAdminCentreSaga({ data,cancel }) {
+export function* updateAdminCentreSaga({ data,setObj,cancel}) {
   try {
     yield put({ type: types.UPDATE_ADMIN_CENTRE_START });
     const response = yield call(updateAdminCentre, data);
-    console.log("response update",response)
 
     if (response?.data?.status == 200) {
       
       toast.success("Update Data Successfully..")
-      cancel({
-        modal:false,
-        edit:false,
-        id:""
-      })
+      cancel();
+      setObj(response?.data?.data?.centre)
       yield put({
         type: types.UPDATE_ADMIN_CENTRE_SUCCESS,
         data:response?.data?.data
       });
+
       
     } else {
       toast.error(response?.data?.message)
@@ -404,19 +401,20 @@ export function* updateAdminCentreSaga({ data,cancel }) {
 }
 
 
-export function* saveAdminCentreSaga({ data,id,cancel }) {
+export function* saveAdminCentreSaga({ data,id,cancel,setObj }) {
   try {
     yield put({ type: types.SAVE_ADMIN_CENTRE_START });
     const response = yield call(saveAdminCentre,id, data);
-    console.log("save update",response)
     if (response?.data?.status == 200) {
       toast.success("Save Data Successfully..")
+      cancel()
+      setObj(response?.data?.data?.centre)
       yield put({
         type: types.SAVE_ADMIN_CENTRE_SUCCESS,
         id,
         data:response?.data?.data
       });
-      cancel()
+     
     } else {
       toast.error(response?.data?.message)
       yield put({
@@ -430,19 +428,19 @@ export function* saveAdminCentreSaga({ data,id,cancel }) {
 }
 
 
-export function* deleteAdminCentreSaga({ data,id,cancel }) {
+export function* deleteAdminCentreSaga({ id,obj,setObj }) {
   try {
     yield put({ type: types.DELETE_ADMIN_CENTRE_START });
-    const response = yield call(deleteAdminCentre,id, data);
-    console.log("deleteAdminCentre rrrrr",response)
+    const response = yield call(deleteAdminCentre,id);
     if (response?.data?.status == 200) {
       toast.success("Save Data Successfully..")
+      setObj(obj?.filter((item)=>item?._id!==id))
+      cancel()
       yield put({
         type: types.DELETE_ADMIN_CENTRE_SUCCESS,
         id,
         data:response?.data?.data
       });
-      cancel()
     } else {
       toast.error(response?.data?.message)
       yield put({
